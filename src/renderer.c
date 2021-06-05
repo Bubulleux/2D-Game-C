@@ -1,11 +1,11 @@
 #include "define.h"
 
-void init_renderer(t_vars vars)
+void init_renderer(t_vars *vars)
 {
-	vars.win_width = 500;
-	vars.win_height = 500;
+	vars->win_width = 500;
+	vars->win_height = 500;
 	
-	vars.win = mlx_new_window(vars.mlx, vars.win_width, vars.win_height, "2D Game 2");
+	vars->win = mlx_new_window(vars->mlx, vars->win_width, vars->win_height, "2D Game 2");
 
 }
 
@@ -16,9 +16,9 @@ void render(t_vars *vars)
 	img->img = mlx_new_image(vars->mlx, vars->win_width, vars->win_height);
 	img->addr = mlx_get_data_addr(img->img, &img->bit_per_pixel, &img->line_lenght, &img->endian);
 	
-	render_square(vars, vars->objects->background, &img);
-	render_square(vars, vars->objects->box, &img);
-	render_square(vars, vars->objects->player, &img);
+	render_square(vars, vars->objects->background, img);
+	render_square(vars, vars->objects->box, img);
+	render_square(vars, vars->objects->player, img);
 
 	mlx_put_image_to_window(vars->mlx, vars->win, img->img, 0, 0);
 	mlx_destroy_image(vars->mlx, img->img);
@@ -26,7 +26,7 @@ void render(t_vars *vars)
 	
 }
 
-void render_square(t_vars* vars, t_square* square, t_img* img)
+void render_square(t_vars *vars, t_square *square, t_img *img)
 {
 	for (int y = 0; y <= square->size_y; y++)
 	{

@@ -2,7 +2,7 @@
 
 
 
-void update(t_vars *vars)
+int update(t_vars *vars)
 {
 	vars->frame += 1;
 	render(vars);
@@ -15,9 +15,11 @@ int main(void)
 
 	vars.frame = 0;
 
-	init_objects(&vars);
-
 	vars.mlx = mlx_init();
+
+	init_renderer(&vars);
+	init_objects(&vars);
+	init_input(&vars);
 
 	mlx_loop_hook(vars.mlx, update, &vars);
 	mlx_loop(vars.mlx);

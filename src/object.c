@@ -1,6 +1,6 @@
 #include "define.h"
 
-void init_objects(t_vars* vars)
+void init_objects(t_vars *vars)
 {
 	vars->objects = (t_objects*) malloc(sizeof(t_objects));
 	vars->objects->player = make_square(50, 50, 50, 50, 0x00ff00ff);
@@ -8,12 +8,12 @@ void init_objects(t_vars* vars)
 	vars->objects->background = make_square(0, 0, vars->win_width, vars->win_height, 0x00999999);
 }
 
-void update_object(t_vars* vars)
+void update_object(t_vars *vars)
 {
 	set_player_pose(vars);
 }
 
-void set_player_pose(t_vars* vars)
+void set_player_pose(t_vars *vars)
 {
 	int x;
 	int y;
@@ -40,7 +40,7 @@ t_square* make_square(int pos_x, int pos_y, int size_x, int size_y, int color)
 }
 
 
-bool is_collide(t_square* square_a, t_square* square_b)
+bool is_collide(t_square *square_a, t_square *square_b)
 {
 	// printf("%d ", square_a->pos_x > (square_b->pos_x + square_b->size_x));
 	// printf("%d ", (square_a->pos_x + square_a->size_x) < square_b->pos_x);
@@ -58,7 +58,7 @@ bool is_collide(t_square* square_a, t_square* square_b)
 		return true;
 }
 
-bool is_collide_point(t_square* square, int x, int y)
+bool is_collide_point(t_square *square, int x, int y)
 {
 	if ((x < square->pos_x || x > square->pos_x + square->size_x) ||
 		(y < square->pos_y || y > square->pos_y + square->size_y))
