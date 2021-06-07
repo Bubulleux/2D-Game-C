@@ -33,7 +33,7 @@ void render_square(t_vars *vars, t_square *square, t_img *img)
 		for (int x = 0; x <= square->size_x; x++)
 		{
 			if (is_collide_point(vars->objects->background, square->pos_x + x, square->pos_y + y))
-				set_pixel(img->img, square->pos_x + x, square->pos_y + y, square->color);
+				set_pixel(img, square->pos_x + x, square->pos_y + y, square->color);
 		}
 	}
 }

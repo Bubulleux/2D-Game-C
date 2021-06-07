@@ -15,15 +15,17 @@ void update_object(t_vars *vars)
 
 void set_player_pose(t_vars *vars)
 {
-	int x;
-	int y;
-	mlx_mouse_get_pos(vars->mlx, vars->win, &x, &y);
+	t_input_vars *intput_v = vars->input_vars;
+	t_square *ply = vars->objects->player;
+	int x = ply->pos_x + (get_input(intput_v, LEFT_ARROW) * -1) + (get_input(intput_v, RIGHT_ARROW) * 1);
+	int y = ply->pos_y + (get_input(intput_v, UP_ARROW) * -1) + (get_input(intput_v, DOWN_ARROW) * 1);
+	//mlx_mouse_get_pos(vars->mlx, vars->win, &x, &y);
 
-	t_square* futur_player = make_square(x - 25, y - 25, 50, 50, 0);
+	t_square* futur_player = make_square(x, y, 50, 50, 0);
 	if (is_collide_point(vars->objects->background, x, y) && !is_collide(vars->objects->box, futur_player))
 	{
-		vars->objects->player->pos_x = x - 25;
-		vars->objects->player->pos_y = y - 25;
+		ply->pos_x = x;
+		ply->pos_y = y;
 	}
 	free(futur_player);
 }
