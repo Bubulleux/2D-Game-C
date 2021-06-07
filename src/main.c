@@ -16,7 +16,7 @@ long long current_timestamp()
 int update(t_vars *vars)
 {
 	vars->frame += 1;
-
+	malloc(sizeof(1000));
 	if (vars->time->last_time_value == 0)
 		vars->time->last_time_value = current_timestamp();
 	
@@ -32,7 +32,7 @@ int update(t_vars *vars)
 		vars->time->last_time_value = current_timestamp();
 		update_object(vars);
 		render(vars);
-		printf("\r %F", (1.0 / vars->time->delta_time));
+		// printf("\r %F", (1.0 / vars->time->delta_time));
 		fflush(stdout);
 	}
 }

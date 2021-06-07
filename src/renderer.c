@@ -28,12 +28,14 @@ void render(t_vars *vars)
 
 void render_square(t_vars *vars, t_square *square, t_img *img)
 {
-	for (int y = 0; y <= square->size_y; y++)
+	for (int y = 0; y <= square->size->y; y++)
 	{
-		for (int x = 0; x <= square->size_x; x++)
+		for (int x = 0; x <= square->size->x; x++)
 		{
-			if (is_collide_point(vars->objects->background, square->pos_x + x, square->pos_y + y))
-				set_pixel(img, square->pos_x + x, square->pos_y + y, square->color);
+			t_vector *point = make_vector(square->pos->x + x, square->pos->y + y);
+			if (is_collide_point(vars->objects->background, point))
+				set_pixel(img, square->pos->x + x, square->pos->y + y, square->color);
+			free_vector(point);
 		}
 	}
 }

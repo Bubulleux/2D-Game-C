@@ -12,7 +12,9 @@
 #define DOWN_ARROW 65364
 #define LEFT_ARROW 65361
 #define RIGHT_ARROW 65363
+
 #define FPS 60.0
+#define PLY_SPEED 250.0
 
 //------------Struct------------
 typedef struct s_img
@@ -24,12 +26,16 @@ typedef struct s_img
 	int endian;
 } t_img;
 
+typedef struct s_vector
+{
+	double x;
+	double y;
+} t_vector;
+
 typedef struct s_square
 {
-	int pos_x;
-	int pos_y;
-	int size_x;
-	int size_y;
+	t_vector *pos;
+	t_vector *size;
 	int color;
 } t_square;
 
@@ -65,10 +71,6 @@ typedef struct s_vars
 } t_vars;
 
 
-
-
-
-
 //------------Function------------
 
 //main.c
@@ -80,9 +82,10 @@ void maint(void);
 void init_objects(t_vars *vars);
 void update_object(t_vars *vars);
 void set_player_pose(t_vars *vars);
-t_square* make_square(int pos_x, int pos_y, int size_x, int size_y, int color);
+void free_square(t_square *square);
+t_square* make_square(t_vector *pos, t_vector *size, int color);
 bool is_collide(t_square *square_a, t_square *square_b);
-bool is_collide_point(t_square* square, int x, int y);
+bool is_collide_point(t_square *square, t_vector *point);
 
 //renderer.c
 void init_renderer(t_vars *vars);
@@ -101,4 +104,12 @@ int get_index(t_input_vars *input_vars, int input);
 //error.c
 void error(char *error);
 
-
+//vector.c
+t_vector* make_vector(double x, double y);
+void free_vector(t_vector *vector);
+// t_vector* add_vector(t_vector *vector_a, t_vector *vector_b);
+// t_vector* substract_vector(t_vector *vector_a, t_vector *vector_b);
+// t_vector* multiplie_vector(t_vector *vector_a, t_vector *vector_b);
+// t_vector* divide_vector(t_vector *vector_a, t_vector *vector_b);
+void normalize_vector(t_vector *vector_a, t_vector *vector_b);
+double get_magnetude_vector(t_vector *vector);
